@@ -221,6 +221,28 @@
       "verification": "python3 examples/walkthrough.py --workflow txn-conflict"
     },
     {
+      "id": "patch-merge",
+      "name": "column-intent patch reconciliation",
+      "entry": "POST /transactions/{tx}/patch then /commit",
+      "steps": [
+        "transport",
+        "engine",
+        "versions",
+        "catalog",
+        "journal"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "catalog",
+        "versions",
+        "journal"
+      ],
+      "success": "disjoint column patches merge into one committed final row",
+      "failure": "same-column overlap, invalidated expectations and unique contention reject; whole-row put conflict semantics unchanged",
+      "verification": "python3 examples/walkthrough.py --workflow patch-merge"
+    },
+    {
       "id": "restart",
       "name": "checkpoint plus journal replay",
       "entry": "laminad startup",

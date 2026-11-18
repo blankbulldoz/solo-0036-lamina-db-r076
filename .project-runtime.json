@@ -36,6 +36,10 @@
       "command": "python3 examples/walkthrough.py --workflow txn-conflict"
     },
     {
+      "workflow_id": "patch-merge",
+      "command": "python3 examples/walkthrough.py --workflow patch-merge"
+    },
+    {
       "workflow_id": "restart",
       "command": "python3 examples/walkthrough.py --workflow restart"
     },

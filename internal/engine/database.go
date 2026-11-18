@@ -26,6 +26,7 @@ type DB struct {
 	commits      uint64
 	conflicts    uint64
 	queries      uint64
+	merges       uint64
 }
 
 func Open(dir string) (*DB, error) {

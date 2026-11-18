@@ -34,6 +34,22 @@ func (s *Server) put(w http.ResponseWriter, r *http.Request) {
 	}
 	write(w, 200, map[string]string{"state": "staged"})
 }
+func (s *Server) patch(w http.ResponseWriter, r *http.Request) {
+	var in struct {
+		Relation string      `json:"relation"`
+		Key      datum.Value `json:"key"`
+		Set      datum.Row   `json:"set"`
+		Expect   datum.Row   `json:"expect"`
+	}
+	if !decode(w, r, &in) {
+		return
+	}
+	if err := s.db.Patch(r.PathValue("tx"), in.Relation, in.Key, in.Set, in.Expect); err != nil {
+		respondError(w, err)
+		return
+	}
+	write(w, 200, map[string]string{"state": "staged"})
+}
 func (s *Server) deleteRow(w http.ResponseWriter, r *http.Request) {
 	var in struct {
 		Relation string      `json:"relation"`

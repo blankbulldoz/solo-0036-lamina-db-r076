@@ -57,6 +57,12 @@ func (v *Value) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (v Value) Null() bool { return v.Kind == "" || v.Kind == "null" }
+func Equal(a, b Value) bool {
+	if a.Null() || b.Null() {
+		return a.Null() && b.Null()
+	}
+	return a == b
+}
 func (v Value) Compare(w Value) (int, error) {
 	if v.Null() || w.Null() {
 		return 0, fmt.Errorf("null has no predicate ordering")

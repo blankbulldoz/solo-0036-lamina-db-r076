@@ -87,6 +87,7 @@ func (s *Server) routes() {
 	s.mux.HandleFunc("POST "+p+"/indexes", s.createIndex)
 	s.mux.HandleFunc("POST "+p+"/transactions", s.begin)
 	s.mux.HandleFunc("POST "+p+"/transactions/{tx}/put", s.put)
+	s.mux.HandleFunc("POST "+p+"/transactions/{tx}/patch", s.patch)
 	s.mux.HandleFunc("POST "+p+"/transactions/{tx}/delete", s.deleteRow)
 	s.mux.HandleFunc("POST "+p+"/transactions/{tx}/commit", s.commit)
 	s.mux.HandleFunc("POST "+p+"/transactions/{tx}/rollback", s.rollback)
